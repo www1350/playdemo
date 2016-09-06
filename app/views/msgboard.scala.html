@@ -1,0 +1,18 @@
+@(msgs: List[models.Message],msgForm:Form[(String,String)])(implicit messages: Messages)
+
+@main("title"){
+    <ul>@msgs.map {message =>
+        <li>
+             <p><strong>@message.title</strong></p>
+            <p>@message.content</p>
+        </li>
+    }
+    </ul>
+
+@helper.form(routes.Application.postMsg()){
+    @helper.inputText(msgForm("title"),'_label -> "title")
+    @helper.inputText(msgForm("content"),'_label -> "content")
+    <input type="submit" value="send">
+}
+
+}
